@@ -29,19 +29,19 @@
 
             <tbody>
 
-            @forelse($users as $user)
+                @forelse($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
 
                     <td>
                         @if($user->profile_pic)
-                            <img src="{{ asset('storage/'.$user->profile_pic) }}"
-                                 class="rounded-circle border"
-                                 width="60"
-                                 height="60"
-                                 style="object-fit:cover;">
+                        <img src="{{ asset('storage/'.$user->profile_pic) }}"
+                            class="rounded-circle border"
+                            width="60"
+                            height="60"
+                            style="object-fit:cover;">
                         @else
-                            <span class="badge bg-secondary">No Image</span>
+                        <span class="badge bg-secondary">No Image</span>
                         @endif
                     </td>
 
@@ -51,19 +51,19 @@
 
                     <td>
                         <a href="{{ route('users.edit',$user->id) }}"
-                           class="btn btn-sm btn-warning">
+                            class="btn btn-sm btn-warning">
                             Edit
                         </a>
                     </td>
                 </tr>
 
-            @empty
+                @empty
                 <tr>
                     <td colspan="6" class="text-muted py-4">
                         No users found.
                     </td>
                 </tr>
-            @endforelse
+                @endforelse
 
             </tbody>
         </table>
