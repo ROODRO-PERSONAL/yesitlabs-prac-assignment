@@ -5,69 +5,124 @@
 @section('content')
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold">Users List</h2>
+    <div>
+        <h2 class="fw-bold mb-0">Users List</h2>
+    </div>
 
-    <a href="{{ route('users.create') }}" class="btn btn-primary">
+    <a href="{{ route('users.create') }}" class="btn btn-primary shadow-sm">
         + Create User
     </a>
 </div>
 
-<div class="card shadow-sm border-0">
-    <div class="card-body">
+<div class="card border-0 shadow-lg">
+    <div class="card-body p-0">
 
-        <table class="table table-hover align-middle text-center">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Profile</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Mobile</th>
-                    <th width="150">Action</th>
-                </tr>
-            </thead>
+        <div class="table-responsive">
 
-            <tbody>
+            <table class="table table-hover align-middle mb-0">
 
-                @forelse($users as $user)
-                <tr>
-                    <td>{{ $user->id }}</td>
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>ID</th>
+                        <th>Profile</th>
+                        <th class="text-start">Name</th>
+                        <th class="text-start">Email</th>
+                        <th>Mobile</th>
+                        <th width="180">Actions</th>
+                    </tr>
+                </thead>
 
-                    <td>
-                        @if($user->profile_pic)
-                        <img src="{{ asset('storage/'.$user->profile_pic) }}"
-                            class="rounded-circle border"
-                            width="60"
-                            height="60"
-                            style="object-fit:cover;">
-                        @else
-                        <span class="badge bg-secondary">No Image</span>
-                        @endif
-                    </td>
+                <tbody>
 
-                    <td class="fw-semibold">{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->mobile }}</td>
+                    @forelse($users as $user)
+                    <tr class="text-center">
 
-                    <td>
-                        <a href="{{ route('users.edit',$user->id) }}"
-                            class="btn btn-sm btn-warning">
-                            Edit
-                        </a>
-                    </td>
-                </tr>
+                        <td class="fw-semibold text-muted">
+                            #{{ $user->id }}
+                        </td>
 
-                @empty
-                <tr>
-                    <td colspan="6" class="text-muted py-4">
-                        No users found.
-                    </td>
-                </tr>
-                @endforelse
+                        <td>
+                            @if($user->profile_pic)
+                            <img src="{{ asset('storage/'.$user->profile_pic) }}"
+                                class="rounded-circle border shadow-sm"
+                                width="55"
+                                height="55"
+                                style="object-fit:cover;">
+                            @else
+                            <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center"
+                                style="width:55px;height:55px;">
+                                N/A
+                            </div>
+                            @endif
+                        </td>
 
-            </tbody>
-        </table>
+                        <td class="text-start fw-semibold">
+                            {{ $user->name }}
+                        </td>
+
+                        <td class="text-start text-muted">
+                            {{ $user->email }}
+                        </td>
+
+                        <td>
+                            <span class="badge bg-light text-dark border">
+                                {{ $user->mobile }}
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <div class="d-flex justify-content-center gap-2">
+
+                                <a href="{{ route('users.edit',$user->id) }}"
+                                    class="btn btn-sm btn-outline-primary">
+                                    Edit
+                                </a>
+
+                                <form action="{{ route('users.destroy',$user->id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Delete this user?')">
+
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    @empty
+                    <tr>
+                        <td colspan="6" class="text-center py-5">
+
+                            <div class="text-muted">
+                                <h5>No Users Found</h5>
+                                <p class="mb-3">Start by creating your first user.</p>
+
+                                <a href="{{ route('users.create') }}"
+                                    class="btn btn-primary">
+                                    Create User
+                                </a>
+                            </div>
+
+                        </td>
+                    </tr>
+                    @endforelse
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 </div>
+
 @endsection

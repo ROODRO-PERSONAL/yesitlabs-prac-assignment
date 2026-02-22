@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
 use App\Services\UserService;
 use App\Http\Requests\StoreUserRequest;
@@ -61,5 +62,16 @@ class UserController extends Controller
         return redirect()
             ->route('users.index')
             ->with('success', 'User Updated Successfully');
+    }
+
+    // delete user
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+
+        $this->userService->delete($user);
+
+        return redirect()->route('users.index')
+            ->with('success', 'User Deleted Successfully');
     }
 }

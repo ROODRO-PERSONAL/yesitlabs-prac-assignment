@@ -50,4 +50,14 @@ class UserService
 
         return $user;
     }
+
+
+    public function delete($user)
+    {
+        if ($user->profile_pic) {
+            Storage::disk('public')->delete($user->profile_pic); // delete profile image
+        }
+
+        return $user->delete();
+    }
 }
