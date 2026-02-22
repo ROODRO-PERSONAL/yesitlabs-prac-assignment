@@ -4,17 +4,30 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h2 class="fw-bold mb-0">Users List</h2>
+
+<div class="card shadow-lg border-0">
+
+    {{-- Card Header --}}
+    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+
+        <h4 class="mb-0 fw-bold text-dark">
+            Users List
+        </h4>
+
+        <div class="d-flex gap-2">
+            <a href="{{ route('users.export') }}" class="btn btn-success">
+                Export CSV
+            </a>
+
+            <a href="{{ route('users.create') }}" class="btn btn-primary">
+                + Create User
+            </a>
+        </div>
+
     </div>
 
-    <a href="{{ route('users.create') }}" class="btn btn-primary shadow-sm">
-        + Create User
-    </a>
-</div>
 
-<div class="card border-0 shadow-lg">
+    {{-- Table --}}
     <div class="card-body p-0">
 
         <div class="table-responsive">
@@ -23,11 +36,11 @@
 
                 <thead class="table-dark text-center">
                     <tr>
-                        <th>ID</th>
-                        <th>Profile</th>
+                        <th width="60">ID</th>
+                        <th width="90">Profile</th>
                         <th class="text-start">Name</th>
                         <th class="text-start">Email</th>
-                        <th>Mobile</th>
+                        <th width="140">Mobile</th>
                         <th width="180">Actions</th>
                     </tr>
                 </thead>
@@ -37,41 +50,45 @@
                     @forelse($users as $user)
                     <tr class="text-center">
 
+                        {{-- ID --}}
                         <td class="fw-semibold text-muted">
                             #{{ $user->id }}
                         </td>
 
+                        {{-- Profile --}}
                         <td>
                             @if($user->profile_pic)
                             <img src="{{ asset('storage/'.$user->profile_pic) }}"
                                 class="rounded-circle border shadow-sm"
-                                width="55"
-                                height="55"
+                                width="50" height="50"
                                 style="object-fit:cover;">
                             @else
                             <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center"
-                                style="width:55px;height:55px;">
+                                style="width:50px;height:50px;">
                                 N/A
                             </div>
                             @endif
                         </td>
 
+                        {{-- Name --}}
                         <td class="text-start fw-semibold">
                             {{ $user->name }}
                         </td>
 
+                        {{-- Email --}}
                         <td class="text-start text-muted">
                             {{ $user->email }}
                         </td>
 
+                        {{-- Mobile --}}
                         <td>
-                            <span class="badge bg-light text-dark border">
+                            <span class="badge bg-light text-dark border px-3 py-2">
                                 {{ $user->mobile }}
                             </span>
                         </td>
 
+                        {{-- Actions --}}
                         <td>
-
                             <div class="d-flex justify-content-center gap-2">
 
                                 <a href="{{ route('users.edit',$user->id) }}"
@@ -89,11 +106,9 @@
                                     <button class="btn btn-sm btn-outline-danger">
                                         Delete
                                     </button>
-
                                 </form>
 
                             </div>
-
                         </td>
 
                     </tr>
@@ -103,8 +118,8 @@
                         <td colspan="6" class="text-center py-5">
 
                             <div class="text-muted">
-                                <h5>No Users Found</h5>
-                                <p class="mb-3">Start by creating your first user.</p>
+                                <h5 class="fw-bold">No Users Found</h5>
+                                <p>Create your first user to get started.</p>
 
                                 <a href="{{ route('users.create') }}"
                                     class="btn btn-primary">
@@ -121,8 +136,8 @@
             </table>
 
         </div>
-
     </div>
+
 </div>
 
 @endsection

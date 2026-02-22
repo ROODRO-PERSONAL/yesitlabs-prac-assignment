@@ -10,6 +10,13 @@
     <!-- Bootstrap 5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet">
+
+    <style>
+        .table tbody tr:hover {
+            transform: scale(1.002);
+            transition: 0.15s ease;
+        }
+    </style>
 </head>
 
 <body class="bg-light">

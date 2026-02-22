@@ -8,3 +8,6 @@ Route::get('/', function () {
 });
 
 Route::resource('users', UserController::class);
+
+Route::get('/users-export', [UserController::class,'export'])
+        ->name('users.export');
