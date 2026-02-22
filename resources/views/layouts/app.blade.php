@@ -21,13 +21,13 @@
 
 <body class="bg-light">
 
-    <nav class="navbar navbar-dark bg-dark">
+    <!-- <nav class="navbar navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ route('users.index') }}">
                 User Management
             </a>
         </div>
-    </nav>
+    </nav> -->
 
     <div class="container mt-5">
 
